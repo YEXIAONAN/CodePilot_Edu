@@ -11,8 +11,8 @@ class SubmissionStatus(StrEnum):
     TIME_LIMIT_EXCEEDED = "TIME_LIMIT_EXCEEDED"
     RESOURCE_LIMIT_EXCEEDED = "RESOURCE_LIMIT_EXCEEDED"
     SYSTEM_ERROR = "SYSTEM_ERROR"
-    # 扩展状态：Docker 不可用时明确报错，禁止回退宿主执行
-    JUDGE_UNAVAILABLE = "JUDGE_UNAVAILABLE"
+    # Docker 不可用不产生提交记录，只以 503 JUDGE_UNAVAILABLE 错误码返回，
+    # 因此这里不设 JUDGE_UNAVAILABLE 状态。
 
 
 class DiagnosisCategory(StrEnum):
@@ -25,9 +25,9 @@ class DiagnosisCategory(StrEnum):
 
 
 class DiagnosisSource(StrEnum):
+    # TEACHER 只允许真实教师复核时人工写入，P0 没有该入口，故不预留枚举值
     RULE = "RULE"
     AI = "AI"
-    HUMAN = "HUMAN"
 
 
 class Confidence(StrEnum):

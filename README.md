@@ -25,7 +25,7 @@ CodePilot Edu 是面向高校与职业院校程序设计初学者的智能实训
 | 学生进度 | 已实现 | 个人提交/通过/错因分布/提示使用/最近记录 |
 | 教师端 | 已实现 | 汇总统计 + 由真实记录计算的待辅导列表（透明规则） |
 | 数据库 | 已实现 | MySQL 8.4 LTS（InnoDB / utf8mb4），PyMySQL，连接池与失效连接检测 |
-| 测试 | 已实现 | 41 项自动化测试通过（真实 MySQL + 真实 Docker 评测） |
+| 测试 | 已实现 | 42 项自动化测试通过（2026-10-24 实测，真实 MySQL + 真实 Docker 评测，详见 docs/TEST_REPORT.md） |
 
 ## 3. 运行环境要求
 
@@ -68,6 +68,9 @@ DEMO_TOKEN=<演示令牌>
 - `DATABASE_URL` / `TEST_DATABASE_URL` 只接受 `mysql+pymysql://`。写入 SQLite 或其他 scheme 时应用直接启动失败，**没有 SQLite 回退路径**。
 - `TEST_DATABASE_URL` 的库名必须以 `_test` 结尾；pytest 启动时会重建该库的表。
 - 所有 `/api/v1/*` 接口要求请求头 `X-Demo-Token`，值为 `DEMO_TOKEN`。未配置令牌时接口失败关闭（503 `DEMO_TOKEN_NOT_CONFIGURED`），不会静默放行。
+- 评测与限流参数（`MAX_SOURCE_BYTES`、`JUDGE_TIMEOUT_SECONDS`、`JUDGE_CASE_TIMEOUT_MS`、
+  `JUDGE_MAX_OUTPUT_BYTES`、`JUDGE_MAX_CASES`、`JUDGE_MAX_CONCURRENCY`、`JUDGE_BUSY_TIMEOUT_SECONDS`）、
+  数据库连接池（`DB_*`）与服务绑定（`HOST`/`PORT`/`CORS_ORIGINS`）均有默认值，说明见 `.env.example` 内注释。
 - **`.env` 已被 `.gitignore` 忽略，禁止提交真实密码或 API Key。**
 
 AI 配置（可选，兼容 OpenAI Chat Completions 协议）：
@@ -131,6 +134,10 @@ CREATE DATABASE IF NOT EXISTS codepilot_edu_test
 GRANT ALL PRIVILEGES ON codepilot_edu.* TO 'codepilot'@'127.0.0.1';
 GRANT ALL PRIVILEGES ON codepilot_edu_test.* TO 'codepilot'@'127.0.0.1';
 ```
+
+注意两条路径的账号主机差异：`docker-compose.yml` 通过 `MYSQL_USER` 创建的是
+`'codepilot'@'%'`（端口仅绑定 `127.0.0.1:3306`，外部不可达）；上面 DBA 手工路径用
+`'127.0.0.1'` 更收紧。两条路径不要混用，以免出现"容器里能用、手工库连不上"的问题。
 
 已有旧数据卷但缺少测试库时，同样补建 `codepilot_edu_test`；不要为补库执行会清空数据卷的操作。
 
@@ -242,13 +249,13 @@ backups/        旧 SQLite 产物留档（不参与运行）
 
 ## 已知问题与未完成项
 
-1. **AI 真实联调**：2026-10-23 已通过本地兼容 OpenAI 接口完成真实调用（返回 `source=AI` 的三层提示，未泄漏隐藏用例），但未在正式厂商账号/公网环境复验；模型输出结构校验已做，证据一致性的人工复核流程尚未建立。AI 失败的 RULE 降级路径已测试。
+1. **AI 真实联调**：2026-10-23 首测、2026-10-24 复演留档（`%TEMP%\codepilot-demo-replay.log`），本地兼容 OpenAI 接口真实调用返回 `source=AI` 三层提示，未泄漏隐藏用例；但未在正式厂商账号/公网环境复验。模型输出结构校验已做，证据一致性的人工复核流程尚未建立。AI 失败的 RULE 降级路径已测试。
 2. Docker Hub 直连不可用时不具备内网镜像源，需先通过镜像站拉取基础镜像并本地打 tag（本次使用 daocloud）。
 3. 提交接口为同步执行，最坏情况下（多用例超时）单次请求约 10 秒；评测繁忙时返回明确错误，未引入任务队列。
 4. Python 使用 3.13.15，与任务书建议的 3.11/3.12 存在版本差异，功能不受影响。
 5. 未引入 Alembic：表结构由 `scripts/init_db.py` 创建；后续字段变更需要手写迁移或在测试库重建，生产库不可直接 `drop_all`。
 6. MySQL 为单实例，未做复制、分库分表或全班并发压测；不能由“换成 MySQL”推断已达到全班并发评测能力。
-7. 前端教师页目前只展示汇总，后端已返回 `pending_tutoring` 待辅导列表，页面表格尚未接入。
+7. 移动端触控目标尚未按 ≥44px 全量调整（本次冻结前优先保证桌面演示链路，移动端细节延后）。
 8. Docker 不可用时返回 503，不写入提交记录，因此该次请求不会出现在学生历史上；这是系统故障处理，不是学生答错。
 9. 未做恶意代码逃逸测试，依赖 Docker 默认 seccomp 策略。
 10. 根目录旧 SQLite 文件已移至 `backups/sqlite-legacy/` 留档，不再参与运行；确认无用后可删除。
