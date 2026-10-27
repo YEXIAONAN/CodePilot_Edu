@@ -1,0 +1,448 @@
+# CodePilot Edu 项目事实库（唯一事实源）
+# 维护 Skill：codepilot-source-review
+# 规则：只登记有来源的事实；status 仅允许 VERIFIED / USER_REPORTED / IN_PROGRESS / PLANNED / UNKNOWN
+# 证据编号对应 competition/data/evidence-ledger.csv；来源编号对应 competition/data/source-index.md
+# 说明：本文件不保存学生个人敏感信息（证件号、住址、手机号完整值等），只保存申报必需的最小字段。
+
+meta:
+  schema_version: 1
+  facts_version: "2026-10-25.1"
+  baseline_date: "2026-10-25"
+  maintainer_skill: codepilot-source-review
+  scoring_and_rules_digest: competition/sources/official-requirements.md
+  note: "任何材料引用事实时必须标注 status；status=PLANNED 的内容不得改写为已完成或已验证。"
+
+identity:
+  brand_en:
+    value: "CodePilot Edu"
+    status: USER_REPORTED
+    claims: [C001]
+  name_zh:
+    value: "AI分层纠错程序设计实训平台"
+    status: USER_REPORTED
+    claims: [C068]
+  historical_name_zh:
+    value: "S17曾用“面向工科程序设计课堂的 AI 分层纠错与教学辅助系统”；S22/C045及AGENTS.md A节旧正式全称为“基于AI错因诊断与学习行为分析的程序设计智能实训平台”。S29本轮明确要求重定名称并保留品牌，现采用C068新名称；此处保留历史冲突，不声称官方登记已修改"
+    status: USER_REPORTED
+    claims: [C001, C031, C045, C068]
+  domain:
+    value: "人工智能、教育科技、软件服务"
+    status: USER_REPORTED
+    claims: [C002]
+  stage:
+    value: "已取得线上报名原稿中的产品界面展示、方案和资格材料；当前按“现有原型与功能展示”组织，源码、部署、安全测试与教学效果仍缺独立证据，不写平台已上线或完整研发已验收"
+    status: UNKNOWN
+    claims: [C022, C049, C052, C064, C072, C073]
+  company_registered:
+    value: "否，尚未注册公司"
+    status: USER_REPORTED
+    claims: [C021]
+  formal_project_name:
+    value: "CodePilot Edu—AI分层纠错程序设计实训平台；本轮按S29明确更名授权采用，正式报名系统及其他材料同步事项见Q12"
+    status: USER_REPORTED
+    claims: [C068]
+competition:
+  event:
+    value: "第十届中华职业教育创新创业大赛（广西区赛·校级选拔）"
+    status: VERIFIED
+    claims: [C003]
+  track:
+    value: "学生赛道"
+    status: VERIFIED
+    claims: [C003]
+  group:
+    value: "本科组"
+    status: VERIFIED
+    claims: [C003, C004]
+  school:
+    value: "广西职业师范学院"
+    status: VERIFIED
+    claims: [C005]
+  college:
+    value: "计算机与信息工程学院"
+    status: USER_REPORTED
+    claims: [C006]
+  quota_college_student_track:
+    value: "计算机与信息工程学院学生赛道推荐名额 3 个"
+    status: VERIFIED
+    claims: [C011]
+  scoring_undergraduate:
+    value: "创新性25 / 商业性35 / 团队情况20 / 引领教育20，合计100"
+    status: VERIFIED
+    claims: [C007]
+  eligibility:
+    value: "学生3—5名（含1名领衔人）、指导教师1—2名；不得跨校组队；不得同时参加两个团队；进入校赛评审后成员与指导教师不得修改"
+    status: VERIFIED
+    claims: [C008]
+  plagiarism_limit:
+    value: "项目查重率不超过15%"
+    status: VERIFIED
+    claims: [C010]
+  required_materials:
+    value: "项目申报评审书（附件1）、项目PPT、VCR（选报）、商业计划书（与评审书D部分一致）、查重报告、其他必要佐证材料"
+    status: VERIFIED
+    claims: [C012]
+  defense_format:
+    value: "现场路演不超过5分钟，答辩3分钟（区赛规则；校赛未载明，按区赛准备）"
+    status: VERIFIED
+    claims: [C013]
+
+deadlines:
+  advisor_review_target:
+    value: "计划在2026年10月25日前提交指导教师审阅，与学院内部截止口径分别记录"
+    status: PLANNED
+    claims: [C037]
+  college_internal_deadline:
+    value: "2026-10-25 20:00"
+    status: USER_REPORTED
+    claims: [C009]
+  college_recommendation:
+    value: "2026-10-29 前完成二级学院推荐"
+    status: VERIFIED
+    claims: [C011]
+  school_final:
+    value: "2026-11-02 校赛遴选（本校通知）"
+    status: VERIFIED
+    claims: [C011]
+  regional_school_round:
+    value: "区赛通知要求 2026-10-30 前完成校级比赛"
+    status: VERIFIED
+    claims: [C014]
+  regional_submission:
+    value: "2026-11-05 前由校区赛管理员提交区赛材料；2026-11-10 前资格审核"
+    status: VERIFIED
+    claims: [C014]
+  conflict_note:
+    value: "本校11月2日校赛晚于区赛10月30日节点，须由本校主管部门确认衔接；不得自行改写任一日期"
+    status: VERIFIED
+    claims: [C014]
+
+product:
+  positioning:
+    value: "面向软件工程、物联网工程等工科专业学生及程序设计课程教师，当前服务范围覆盖C、Java、Python三门语言"
+    status: USER_REPORTED
+    claims: [C033, C043]
+  loop:
+    value: "功能设计：拟将同题提交、按语言编译或解释执行、失败依据、AI诊断、三级提示、修改重提与教师查看关联；不以原稿陈述作为实现证明"
+    status: PLANNED
+    claims: [C052]
+  demand_basis:
+    value: "据团队课堂观察，教师讲授与学生IDE练习场景中存在学生出错后难以及时获得指导、教师难以同时掌握个体困难的问题；非访谈统计结果"
+    status: USER_REPORTED
+    claims: [C035]
+  future_languages:
+    value: "其他语言将根据课程需求和适配工作量另行规划"
+    status: PLANNED
+    claims: [C048]
+  value_proposition:
+    value: "帮助学生从发现代码错误，过渡到理解错误原因并独立修正"
+    status: USER_REPORTED
+    claims: [C015]
+  innovation_direction:
+    value: "评测证据驱动的错因诊断、三级分层提示、纠错过程可追溯反馈；属待验证的应用流程创新，不主张原创算法、原创编译器或自研基础模型"
+    status: USER_REPORTED
+    claims: [C016]
+  supported_languages:
+    value: "三语言服务范围为C、Java、Python；历史开发完成陈述仅为负责人提供，运行能力拟按三语言技术验证矩阵逐项验收"
+    status: USER_REPORTED
+    claims: [C043, C052, C057]
+  evaluation_design:
+    value: "拟采用连续失败3次的初始辅导规则、同人同题最高提示层级、限定窗口并去重的提示后完成率、修改理由与无提示新题、至少2次教师采用报告的辅导记录；不预填百分比"
+    status: PLANNED
+    claims: [C061]
+
+technology:
+  frontend:
+    value: "Vue 3（功能设计，实际部署组件未经运行核对）"
+    status: PLANNED
+    claims: [C032, C052]
+  backend:
+    value: "Python + FastAPI（功能设计，实际部署组件未经运行核对）"
+    status: PLANNED
+    claims: [C032, C052]
+  storage:
+    value: "MySQL（负责人于2026-10-24再次明确确认已全部改用；作为当前唯一数据库口径，不再列为备选；独立运行与配置证据另见Q05）"
+    status: USER_REPORTED
+    claims: [C067]
+  orm:
+    value: "SQLAlchemy访问MySQL的设计说明；数据库类型按负责人当前确认，ORM实际部署仍未经独立核验"
+    status: PLANNED
+    claims: [C032, C067]
+  judge:
+    value: "功能设计：C使用GCC，Java采用编译运行环境，Python采用解释执行环境；受限隔离、断网和限额须按验收矩阵核验"
+    status: PLANNED
+    claims: [C052, C057]
+  ai:
+    value: "功能设计：通过兼容API接入通用模型，诊断与首层提示同次生成；模型故障保留评测依据并降级，不冒称措施已生效"
+    status: PLANNED
+    claims: [C052, C058]
+  implementation_state:
+    value: "S30包含6幅产品界面图片及1幅架构设计图，可直接说明界面和设计内容；未取得独立源码、部署及测试记录，不能据图片确认三语言运行、隔离或故障处理完成"
+    status: UNKNOWN
+    claims: [C022, C064, C072, C073]
+  safety_design:
+    value: "拟验收业务与评测分离、非特权隔离断网、资源限额、任务清理、任务超时、模型故障降级及重复请求处理；架构图仅为设计示意"
+    status: PLANNED
+    claims: [C052]
+team:
+  team_name:
+    value: "ZERO团队"
+    status: USER_REPORTED
+    claims: [C018]
+  member_count:
+    value: "4 名学生（含项目负责人）"
+    status: USER_REPORTED
+    claims: [C018]
+  leader:
+    value: "叶兴楠（项目负责人/领衔人）"
+    status: USER_REPORTED
+    claims: [C018]
+  members:
+    value: "叶兴楠、林李想、黄显涛、汪盛淇"
+    status: USER_REPORTED
+    claims: [C018]
+  leader_academic:
+    value: "软件工程专业，26中本软工1班，2026级"
+    status: USER_REPORTED
+    claims: [C019]
+  member_academic:
+    value: "负责人提供的V1.3已填四名成员部分个人与学业字段，本轮按USER_REPORTED保留；正式学籍资格仍由学校确认"
+    status: USER_REPORTED
+    claims: [C019, C044]
+  advisors:
+    value: "李志军，硕士、教授；姓名与履历据负责人本轮提供，任职单位、指导意愿及履历由本人确认，见Q01"
+    status: USER_REPORTED
+    claims: [C069, C070]
+  division_draft:
+    value: "保留V1.7原稿既有分工：负责人统筹需求与材料；林李想前后端、接口与评测；汪盛淇材料、课程支持与质量记录；黄显涛题目样例、测试记录与演示资料整理，由负责人协调；计划工时和验收不作为已完成经历"
+    status: USER_REPORTED
+    claims: [C034, C065]
+  advisor_support:
+    value: "李志军具有程序设计竞赛、大学生创新创业项目指导、教学改革与科技项目评审经验，拟支持课程设计、训练服务、项目推进和评审准备；教师个人指导奖项、论文及软著申请不得转写为本项目成果"
+    status: USER_REPORTED
+    claims: [C070]
+progress:
+  design_docs:
+    value: "已形成项目方案、商业计划草案、答辩PPT草案、竞品核查与审核清单"
+    status: VERIFIED
+    claims: [C025]
+  source_code:
+    value: "未提供源码仓库、提交记录或版本说明"
+    status: UNKNOWN
+    claims: [C022]
+  tests:
+    value: "未提供用例、预期/实际结果、隔离与异常处理日志"
+    status: UNKNOWN
+    claims: [C022]
+  deployment:
+    value: "未提供任何部署或运行环境证据"
+    status: UNKNOWN
+    claims: [C022]
+  user_research:
+    value: "拟探索性访谈2名任课教师、10名学生、1名课程经费联系人，不预填需求比例、评价或采购结果"
+    status: PLANNED
+    claims: [C054]
+  teaching_pilot:
+    value: "最小课堂试点拟为1班1名教师1门语言、20席位4周、8独立题、40基础用例、160学生题次、约480提交和4份周报告；不是既有用户或成效"
+    status: PLANNED
+    claims: [C055]
+  implementation_plan:
+    value: "拟围绕现有界面展示开展一期课堂验证，再根据反馈升级；通过教师免费基础使用、每日一题或主题练习、校内训练支撑招募；与筹建中的未来科技开放创造实验空间探索合作，未作为签约或运行成果"
+    status: PLANNED
+    claims: [C055, C071, C083]
+  language_support:
+    value: "历史负责人报告C、Java、Python语言支持完成（USER_REPORTED）；本轮技术验证拟各5个代表题资源×2错误代码共30样例并另列正确案例，不等同三个教学班"
+    status: USER_REPORTED
+    claims: [C043, C057]
+  evidence_scope:
+    value: "本轮S30线上报名原稿含4幅资格图片、6幅产品界面图和1幅架构图；仅可确认文稿与界面展示内容，不替代资格认定或运行、访谈、试点、实际费用和问题闭环原始记录"
+    status: UNKNOWN
+    claims: [C064, C072, C073]
+  product_exhibits:
+    value: "原稿图2/3为1到N求和，图4为成绩等级判定；不能与LOOP-01依次输出1至10拼为同题连续真实运行。图5数字为演示数据，图6部分配置为前端内置展示"
+    status: USER_REPORTED
+    claims: [C073]
+verified_results:
+  revenue:
+    value: "无收入、无合同、无客户数量数据"
+    status: UNKNOWN
+    claims: [C027]
+  funding:
+    value: "无投资金额、无投资协议"
+    status: UNKNOWN
+    claims: [C027]
+  ip:
+    value: "无专利、软著或其他知识产权凭证"
+    status: UNKNOWN
+    claims: [C027]
+  honors:
+    value: "无获奖记录可核验"
+    status: UNKNOWN
+    claims: [C027]
+  market_share:
+    value: "无市场份额数据，不得引用"
+    status: UNKNOWN
+    claims: [C027]
+
+business_model:
+  users:
+    value: "使用者：C、Java、Python程序设计课程的在校学生；决策者：任课教师/课程负责人；付费主体：院系或课程建设经费（假设）"
+    status: PLANNED
+    claims: [C028, C043]
+  path:
+    value: "拟由本校最小课堂验证起步，教师免费基础使用带动班级，形成学期课程适配与支持服务；另设小班训练作为第二主要收入，师资落实后开班；广告、书籍及一对一辅导仅后续探索"
+    status: PLANNED
+    claims: [C076, C077, C081, C083]
+  pricing_hypothesis:
+    value: "V2.0拟定课程服务4800元/包/学期；小班训练499元/席、12席/期、4周；均为未验证商业假设，付费主体、采购与履约待Q11/Q13确认。历史1500元情景保留追溯，不再作为本版定价"
+    status: PLANNED
+    claims: [C076, C077]
+  semester_package:
+    value: "计划学期包：1班1教师1语言、40席位、16周、32独立题、每题5组共160基础用例、1280学生题次、3840测算提交、4份阶段报告"
+    status: PLANNED
+    claims: [C056]
+  training_package:
+    value: "小班训练计划12席、4周、24课时；499元/席，满班收入5988元；外聘师资24小时×120元，团队支持18小时×40元，其余模型50元、云50元、资料100元，直接成本3800元"
+    status: PLANNED
+    claims: [C077]
+  points:
+    value: "注册赠10积分，完成合格练习每日奖励2积分，审核题解奖励5积分，每月奖励不超过30积分；2积分兑换1次AI提示，免费每日最多3次、每月最多10次；积分不兑现金、不作为收入，年度免费AI预算分别600/900/1200元"
+    status: PLANNED
+    claims: [C081]
+financial_scenario:
+  basis:
+    value: "本轮以S33的2027—2029完整年度经营预测为当前测算：课程包4800元、训练499元/席×12席；所有价格、规模和费用均为PLANNED情景假设，非订单、账单或实际利润。C058合成调用仅历史轻量交付参考"
+    status: PLANNED
+    claims: [C058, C076, C077, C079]
+  cost_breakdown:
+    value: "新课程包直接成本假设40小时×40元+模型100元+增量云评测存储400元=2100元；单位交付毛贡献2700元。历史32小时×30元、模型68.208元和云400元合计1428.208元仅为轻量交付基线，不是平台全年成本"
+    status: PLANNED
+    claims: [C059, C060, C076]
+  contribution:
+    value: "课程包4800−2100=2700元，毛贡献率56.25%；12席训练5988−3800=2188元，毛贡献率36.54%；尚需分摊研发、资源建设、平台、推广、管理及税费支付准备，不称单位净利润"
+    status: PLANNED
+    claims: [C076, C077]
+  payback:
+    value: "启动资源需求30000元，其中现金需求13200元、团队时间折算16800元；含9200元周转准备。2027已列年度费用中的研发、资源等不重复加计，周转准备不作费用；不宣称资金已筹集或投资已回收"
+    status: PLANNED
+    claims: [C078, C079]
+  labor_sensitivity:
+    value: "新课程包按40小时×40元计，训练团队支持18小时×40元且外聘24课时×120元另计；相同团队工时若实付则替换非现金折算，不能重加。历史32小时轻量适配边界保留在C060，不能用于新完整服务毛利"
+    status: PLANNED
+    claims: [C060, C076, C077, C080]
+  current_document:
+    value: "V2.0以S29五大板块要求与S33新服务组合、定价及三年预测为当前方案；替代S25用于V1.7的定价与成本结论，历史1428.21/1500/71.79仅追溯，不作为本版价格、全年成本或净利润"
+    status: PLANNED
+    claims: [C068, C076, C079, C083]
+  forecast:
+    value: "2027/2028/2029拟交付8/12/18个课程包、4/6/8期训练；预测收入62352/93528/134304元，全口径经济成本60717.60/83676.40/112115.20元，预测经营结余1634.40/9851.60/22188.80元；含税费与支付准备按收入5%预算，非税率认定"
+    status: PLANNED
+    claims: [C079]
+  capacity:
+    value: "2027/2028/2029团队工时932/1218/1604小时；按4学生、37工作周折合每人每周6.30/8.23/10.84小时；外聘师资96/144/192课时。课程联系人12/18/24、免费班级6/9/12、付费班级4/6/9、每班每年2包均为转化假设，须先核对师资与排期"
+    status: PLANNED
+    claims: [C080]
+  conservative_scenario:
+    value: "2027保守复合风险：课程包4个、训练2期，课程适配工时翻倍至80小时且模型预算150元；预测收入31176元、经济成本49758.80元、经营结余−18582.80元，应控制排期、复用资源并按真实反馈调整服务范围"
+    status: PLANNED
+    claims: [C082]
+market_background:
+  national_scope:
+    value: "教育部2025年全国教育事业发展统计公报：全国普通本科学校1278所、普通本科招生503.71万人；专科起点本科招生另列，统计不含港澳台。仅作背景，不是本项目客户、份额或收入依据"
+    status: VERIFIED
+    claims: [C074]
+  early_scope:
+    value: "拟从本校相关程序设计课程、校内实训与训练活动起步；可服务院系数量、采购意向和实际客户规模未验证，不以全国人数外推"
+    status: PLANNED
+    claims: [C054, C055, C083]
+
+competitors:
+  checked_at: "2026-10-25"
+  method: "S32本轮复核PTA、头歌、CodeGrade、ChatGPT学习模式官方资料；PTA混合答疑与头歌部分能力读取官方URL搜索索引，其余正文；未登录试用、未询价、未性能测试。Moodle与GitHub Copilot分别保留S27/S18历史核查，不称本轮复核"
+  entries:
+    - name: "PTA 拼题A"
+      confirmed: "自动评测；人工/智能混合答疑；成绩与答卷分析"
+      boundary: "具体三级提示与统一过程事件关联，公开资料未确认"
+      status: VERIFIED
+      claims: [C030, C063, C075]
+    - name: "头歌 EduCoder"
+      confirmed: "智能评测；大模型助教；代码回溯；课堂统计；本地化部署"
+      boundary: "综合平台功能重合度高，需验证课程实施体验"
+      status: VERIFIED
+      claims: [C030, C063, C075]
+    - name: "Moodle CodeRunner"
+      confirmed: "测试驱动评测；重复提交；可定制反馈；Moodle报告"
+      boundary: "所查插件文档未确认内置LLM分层提示；需自建Jobe运维"
+      status: VERIFIED
+      claims: [C030, C063]
+    - name: "CodeGrade"
+      confirmed: "自动评测；可配置AI助手；教师可见对话；LTI集成"
+      boundary: "与本项目重合度高，不得把AI+过程可见宣称为独有"
+      status: VERIFIED
+      claims: [C030, C063, C075]
+    - name: "通用大模型（ChatGPT学习模式）"
+      confirmed: "提问引导；逐步/分层解释；学习反馈"
+      boundary: "课程统一判题与教师干预链未确认；不得写成只会直接给答案"
+      status: VERIFIED
+      claims: [C030, C063, C075]
+    - name: "通用AI编程助手（GitHub Copilot示例）"
+      confirmed: "代码建议、代码解释、测试生成及修复建议"
+      boundary: "仅据官方文档，未登录试用；不据此断言其缺少教师工作流"
+      status: VERIFIED
+      claims: [C040]
+
+open_questions:
+  - id: Q01
+    question: "指导教师李志军（教授）的姓名与相关履历已据S29登记；请本人确认任职单位、指导意愿及履历，名单冻结前落实，不再作为姓名未知项"
+    block_level: BLOCKER
+    owner: 项目负责人
+  - id: Q02
+    question: "核对负责人提供V1.3已填个人与成员字段、必要申报联系字段及学籍证明；本轮保留已有值，不要求重新提供已填数据"
+    block_level: BLOCKER
+    owner: 项目负责人及学籍部门
+  - id: Q03
+    question: "学院内 2026-10-25 20:00 截止、收件渠道与文件命名的原件依据"
+    block_level: MAJOR
+    owner: 学院对接人
+  - id: Q04
+    question: "校赛11月2日与区赛10月30日节点的衔接口径"
+    block_level: MAJOR
+    owner: 学校教务处
+  - id: Q05
+    question: "S30产品界面图与架构设计图已取得；仍需真实产品版本、MySQL运行配置、三语言及异常验证、集中提交日志和问题闭环原始台账。界面内容可展示，独立运行和安全证据仍UNKNOWN，不以演示数字证明成效"
+    block_level: MAJOR
+    owner: 项目负责人
+  - id: Q06
+    question: "正式查重报告（≤15%）由何系统出具、何时完成"
+    block_level: BLOCKER
+    owner: 项目负责人
+  - id: Q07
+    question: "本轮仅更新线上报名材料指定申报书V2.0，独立商业计划书和PPT未同步；成套提交前需统一新名称、五板块方案、4800元课程服务、499元/席训练、2027—2029预测及证据属性"
+    block_level: MAJOR
+    owner: 项目负责人
+  - id: Q08
+    question: "已解决：负责人本轮再次确认全部改用MySQL，当前数据库唯一口径为MySQL，原有数据库分歧关闭；运行证据核验归Q05，不再要求负责人选择数据库"
+    resolution_state: CLOSED
+    resolution_claims: [C067]
+    block_level: MINOR
+    owner: 项目负责人
+  - id: Q09
+    question: "A表项目联系地址、邮编、办公电话，以及投资和专利申报内容仍保留原表空位；负责人确认真实值或不适用后再填写，不从个人联系方式推定"
+    block_level: BLOCKER
+    owner: 项目负责人
+  - id: Q10
+    question: "落实真实课程、访谈对象、参与授权和试点窗口；计划接触2教师10学生1经费联系人，按同人同题去重、限定窗口采集原始记录，不预填成效"
+    block_level: MAJOR
+    owner: 项目负责人及任课教师
+  - id: Q11
+    question: "确认新服务边界与采购归口、4800元/学期课程包和499元/席（12席）训练的价格接受度、实际报价反馈及服务工时；本轮所有金额均为情景假设，不是采购或收入"
+    block_level: MAJOR
+    owner: 项目负责人及课程经费联系人
+  - id: Q12
+    question: "本轮按S29明确更名授权采用CodePilot Edu—AI分层纠错程序设计实训平台；正式报名系统、独立商业计划书和PPT需同步核对；不声称官方登记已变更"
+    block_level: MAJOR
+    owner: 项目负责人
+  - id: Q13
+    question: "落实训练外聘师资来源、24课时/期排期与120元/课时预算；与筹建中的未来科技开放创造实验空间确认合作范围、授权和资源，不把筹建与拟合作写成已落地"
+    block_level: MAJOR
+    owner: 项目负责人及指导教师
